@@ -1,0 +1,28 @@
+{
+  "name": "connect-lite",
+  "version": "1.0.0",
+  "description": "Updates!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hkresch/Connect-Lite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hkresch/Connect-Lite/issues"
+  },
+  "homepage": "https://github.com/hkresch/Connect-Lite#readme",
+  "dependencies": {
+    "@neo4j/graphql": "^3.4.0",
+    "apollo-server": "^3.9.0",
+    "dotenv": "^16.0.1",
+    "graphql": "^16.5.0",
+    "neo4j-driver": "^4.4.6"
+  }
+}
