@@ -1,13 +1,32 @@
+// function Navigation() {
+//   return (
+//     <>
+//       <Navbar bg="dark" variant="dark">
+//         <Container>
+//           <Navbar.Brand href="/home">Navbar</Navbar.Brand>
+//           <Nav className="me-auto">
+//             <Nav.Link href="/home">Home</Nav.Link>
+//             <Nav.Link href="/people">People</Nav.Link>
+//             <Nav.Link href="/shows">Shows</Nav.Link>
+//           </Nav>
+//         </Container>
+//       </Navbar>
+//       <br />
+//       </>
+//   );
+// }
+
+// export default Navigation;
+
 import React from "react"
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
-import Login from './components/LoginModal'
 
 const Navbar = () => {
     const path = window.location.name
     return (
     <nav className="nav">
     <Link to="/" className='site-title'>
-        Movie Connect
+        TV Lite
     </Link>
     <ul>
         <CustomLink to="/home">Home</CustomLink>

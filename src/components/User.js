@@ -10,12 +10,3 @@ const User = ({id, name}) => {
 
 export default User;
 
-
-// query Users {
-//     users {
-//       name
-//       shows {
-//         name
-//       }
-//     }
-//   }

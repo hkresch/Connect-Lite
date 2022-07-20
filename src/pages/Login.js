@@ -4,7 +4,7 @@ import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase"
 import { useAuthState } from "react-firebase-hooks/auth";
 import "../styles/Login.css";
 import Home from "../pages/Home";
-import Loader from "./Loader";
+//import Loader from "../components/Loader";
 
 
 
@@ -15,9 +15,9 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, loading, error] = useState("");
   const navigate = useNavigate();
-  if (loading) return <Loader/>;
+  //if (loading) return <Loader/>;
 
-  if (user) navigate("/home");
+  //if (user) navigate("/home");
 
 
 

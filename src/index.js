@@ -7,8 +7,34 @@ import {
     ApolloClient,
     InMemoryCache,
     HttpLink, 
-    ApolloProvider
+    ApolloProvider,
+    createHttpLink
 } from "@apollo/client";
+import { auth } from "./firebase"
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { UserAuthContext } from "./contexts/UserAuth"
+
+
+
+
+// const STAGE = !process.env.REACT_APP_ENVIRONMENT? 'local': process.env.REACT_APP_ENVIRONMENT ;
+// //either production, development, or local
+// //target graphQL URI depending on the stage from the env file
+
+// const GQL_URI = STAGE === 'production' ? process.env.REACT_APP_PROD_GQL_URI :
+//                 STAGE === 'local' ? process.env.REACT_APP_LOCAL_DEV_GQL_URI :
+//                 process.env.REACT_APP_REMOTE_DEV_GQL_URI;
+
+// const httpLink = createHttpLink({
+//     uri: GQL_URI,
+// });
+
+// const authLink = setContext(async (_, { headers }) => {
+//     //get the authentication token from local storage if it exists
+//     const token = await auth.currentUser.getIdToken()
+
+// })
+// use token for authentication
 
 
 const client = new ApolloClient ({
@@ -26,5 +52,3 @@ root.render(
         </BrowserRouter>
     </React.StrictMode>
 )
-
-//ApolloWrapper is what is breaking it 

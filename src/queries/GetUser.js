@@ -2,10 +2,10 @@ import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import Loader from '../components/Loader';
 
-const GET_USER = gql`
+export const GET_USER = gql`
 query Query {
     users(where: $where) {
-      name
+      email
     }
   }
 `
@@ -24,4 +24,4 @@ function GetUser ({where}) {
     
 } 
 
-export default GetUser
+export default GetUser;

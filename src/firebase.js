@@ -37,14 +37,14 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
   try {
-    const res = await signInWithPopup(auth, googleProvider);
-    const user = res.user;
+    const UserCredential = await signInWithPopup(auth, googleProvider);
+    const user = UserCredential.user;
     const q = GetUser(user.name);
     if (q.id === 0) {
       await addUser( {  //CHANGE
         id: user.uid,
         name: user.displayName,
-        authProvider: "google",
+        authProvider: "google", //probably unnecessary
         email: user.email,
       });
     }
@@ -67,13 +67,13 @@ const logInWithEmailAndPassword = async (email, password) => {
 
 const registerWithEmailAndPassword = async (name, email, password) => {
   try {
-    const res = await createUserWithEmailAndPassword; //change this
-    const user = res.user;
+    const UserCredential = await createUserWithEmailAndPassword; //change this
+    const user = UserCredential.user;
     await addUser ({
       id: user.id,
-      name,
+      name: user.displayName,
       authProvider: "local",
-      email,
+      email: user.email,
     })
   } catch(err) {
     console.error(err);
@@ -92,8 +92,8 @@ const sendPasswordReset = async (email) => {
   }
 };
 
-const logout = () => {
-  signOut(auth);
+const logout = () => { 
+  signOut(auth)
 };
 
 
@@ -106,6 +106,7 @@ export {
   sendPasswordResetEmail,
   logout,
 };
+
 
 
 

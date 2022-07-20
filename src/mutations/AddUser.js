@@ -36,25 +36,23 @@ const addUser = () => {
 
     if (error) return `Submission error! ${error.message}`;
 
-    addUser({
-        variables:{
-            "input": [
-                {
-                    "name": nameInput.value,
-                    "id": hfiosa,
-                    "email": emailInput.value,
-                    "authProvider": authInput.value,
+    // addUser({   //this is what I put to call it?
+    //     variables:{
+    //         "input": [
+    //             {
+    //                 "name": nameInput.value,
+    //                 "id": hfiosa,               //change this 
+    //                 "email": emailInput.value,
+    //                 "authProvider": authInput.value,
 
-                }
-            ]
-        }
-    });
+    //             }
+    //         ]
+    //     }
+    // });
 
     return (
         <div>
-            <p key={user.name}>
-                {user.name}
-            </p>
+            
         </div>
 
     )

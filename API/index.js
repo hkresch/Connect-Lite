@@ -13,22 +13,24 @@ const { resolvers } = require('./resolvers')
 const typeDefs = gql`
 
 type USER {
-    name: String
-    id: Int
-    email: String 
-    authProvider: String
+    id: ID! @id(autogenerate: true)
+    name: String!
+    email: String !
+    authProvider: String!
     shows: [SHOW!]! @relationship(type: "WATCHED", direction: OUT)
 
 }
 
 type SHOW {
-    name: String
+    id: ID! @id(autogenerate: true)
+    name: String!
     users: [USER!]! @relationship(type: "WATCHED", direction: IN)
     genres: [GENRE!]! @relationship(type: "MEMBER", direction: OUT)
 }
 
 type GENRE {
-    name: String
+    id: ID! @id(autogenerate: true)
+    name: String!
     shows: [SHOW!]! @relationship(type: "MEMBER", direction: IN)
 }
 
