@@ -10,9 +10,8 @@ import {
     ApolloProvider,
     createHttpLink
 } from "@apollo/client";
-import { auth } from "./firebase"
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { UserAuthContext } from "./contexts/UserAuth"
+import { UserAuthProvider } from "./contexts/UserAuth"
 
 
 
@@ -34,7 +33,6 @@ import { UserAuthContext } from "./contexts/UserAuth"
 //     const token = await auth.currentUser.getIdToken()
 
 // })
-// use token for authentication
 
 
 const client = new ApolloClient ({
@@ -46,8 +44,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
     <React.StrictMode>
         <BrowserRouter forceRefresh={true}>
-        <ApolloProvider client={client}>
+       <ApolloProvider client={client}>
+       <UserAuthProvider>
         <App />
+        </UserAuthProvider>
         </ApolloProvider>
         </BrowserRouter>
     </React.StrictMode>

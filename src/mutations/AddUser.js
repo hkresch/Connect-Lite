@@ -6,18 +6,17 @@ import { isRequiredInputField } from "graphql";
 
 
 
-
-
-export const CREATE_USER = gql`
-mutation Mutation($input:[USERCreateInput!]!){
-    createUsers(input: $input) {
-        users {
-            name 
+export const CREATE_USER = gql`  
+    mutation MergePerson($email: String!, $name: String!, $active: Boolean!, $userIconUrl: String,$role: String) {
+        mergePerson(email: $email, name: $name, active: $active, userIconUrl: $userIconUrl, role: $role) {
+            name
             email
         }
     }
-}
+
 `
+
+
 
 const addUser = () => {
     
@@ -35,20 +34,6 @@ const addUser = () => {
     if (loading) return <Loader/>;
 
     if (error) return `Submission error! ${error.message}`;
-
-    // addUser({   //this is what I put to call it?
-    //     variables:{
-    //         "input": [
-    //             {
-    //                 "name": nameInput.value,
-    //                 "id": hfiosa,               //change this 
-    //                 "email": emailInput.value,
-    //                 "authProvider": authInput.value,
-
-    //             }
-    //         ]
-    //     }
-    // });
 
     return (
         <div>

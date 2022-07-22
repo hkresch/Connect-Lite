@@ -5,14 +5,12 @@ import Form from 'react-bootstrap/Form';
 import { useAuth} from '../contexts/UserAuth';
 import "../styles/Login.css"
 import GoogleButton from 'react-google-button';
-import Register from '../pages/Register';
-import Reset from '../pages/Reset';
 
 
 
- const LoginModal = () => {
+ const RegisterModal = () => {
 
-  const {logInWithEmailAndPassword, googleLogin, auth, registerWithEmailAndPassword } = useAuth();
+  const { auth, registerWithEmailAndPassword  } = useAuth();
   // const name = useAuth();
   
   const [email, setEmail] = useState("")
@@ -25,15 +23,13 @@ import Reset from '../pages/Reset';
 
   return (
     <>
-    <div className="d-grid gap-2">
-      <Button variant="primary" onClick={handleShow} size="lg">
-        Signin
-      </Button>
-      </div>
+    <Button variant="primary" onClick={handleShow} size="lg">
+        Register
+    </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal onClick={handleShow} show={show}>
         <Modal.Header closeButton>
-          <Modal.Title>Sign In</Modal.Title>
+          <Modal.Title>Register</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -56,26 +52,18 @@ import Reset from '../pages/Reset';
                 placeholder=""
                 onChange={(e) => setPassword(e.target.value)}  />
             </Form.Group>
-            <Button variant='primary' type='submit'
-            onClick={() => logInWithEmailAndPassword(auth, email, password)}>
-            Login
+            <Button variant='primary' type='submit' onClick={() => registerWithEmailAndPassword(auth, email, password)}>
             </Button>
             <GoogleButton
         type="light"
         onClick={googleLogin}>
-        Login with Google
+        Register with Google
         </GoogleButton>
-        <Button onClick={() => Register}>
-    Register
-    </Button>
-    <Button onClick={Reset}>
-    Reset
-    </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
@@ -84,4 +72,4 @@ import Reset from '../pages/Reset';
 
  }
 
-export default LoginModal;
+export default RegisterModal;

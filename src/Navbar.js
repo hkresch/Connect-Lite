@@ -1,27 +1,10 @@
-// function Navigation() {
-//   return (
-//     <>
-//       <Navbar bg="dark" variant="dark">
-//         <Container>
-//           <Navbar.Brand href="/home">Navbar</Navbar.Brand>
-//           <Nav className="me-auto">
-//             <Nav.Link href="/home">Home</Nav.Link>
-//             <Nav.Link href="/people">People</Nav.Link>
-//             <Nav.Link href="/shows">Shows</Nav.Link>
-//           </Nav>
-//         </Container>
-//       </Navbar>
-//       <br />
-//       </>
-//   );
-// }
-
-// export default Navigation;
-
 import React from "react"
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import { useAuth} from "./contexts/UserAuth";
+import Button from "react-bootstrap/esm/Button";
 
 const Navbar = () => {
+    const { user, authenticated, logout } = useAuth();
     const path = window.location.name
     return (
     <nav className="nav">
@@ -32,13 +15,15 @@ const Navbar = () => {
         <CustomLink to="/home">Home</CustomLink>
         <CustomLink to="/people">People</CustomLink>
         <CustomLink to="/shows">Shows</CustomLink>
+        <CustomLink to="/logout">Logout</CustomLink>
+        <CustomLink to="/register">Register</CustomLink>
     </ul>
     </nav>
     )
     
 }
 
-export default Navbar
+export default Navbar;
 
 
 const CustomLink = ({to, children, ...props}) => {

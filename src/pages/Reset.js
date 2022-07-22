@@ -6,15 +6,12 @@ import { auth, sendPasswordResetEmail } from "../firebase";
 import "../styles/Reset.css";
 import Loader from "../components/Loader";
 
-function Reset() {
+const Reset = () => {
     const [email, setEmail] = useState("");
     const [user, loading, error] = useAuthState(auth);
-    const navigate = useNavigate();
 
     
     if (loading) return <Loader/>;
-
-    if (user) navigate("/Home")
     
 
     return (
@@ -23,7 +20,6 @@ function Reset() {
                 <input
                     type="text"
                     className="reset__textBox"
-                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="E-mail Address"/>
                 <button

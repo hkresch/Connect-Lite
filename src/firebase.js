@@ -26,6 +26,8 @@ const firebaseConfig = {
   appId: "1:788405864333:web:864ec251f314bca5935fc4"
 };
 
+
+// put user object admin
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

@@ -1,21 +1,23 @@
-import { logout } from "../firebase";
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import LoginModal from "./LoginModal";
-import
+import { useAuth } from "../contexts/UserAuth";
 
 
 const LogoutModal = () => {
+    
+    const { logout } = useAuth();
+    console.log("hi")
+
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
     return (
         <>
-
         <Button variant="primary" onClick={handleShow}>
             Logout
         </Button>
@@ -24,24 +26,23 @@ const LogoutModal = () => {
             <Modal.Header closeButton>
                 <Modal.Title>Logout</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Are you sure you would like to logout?</Modal.Body>
+            <Modal.Body>
+                <Button variant="primary" onClick={logout}>
+                    Logout
+                </Button>
+            </Modal.Body>
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary">
                     Close
                 </Button>
-                <Button href="/login" variant="primary" onClick={() => {
-                    logout();
-                    handleClose();
-                }}>
-                    Logout
-                    </Button>
             </Modal.Footer>
         </Modal>
         
         
         </>
-    )
+    );
 }
 
 export default LogoutModal;
+

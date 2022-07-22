@@ -1,66 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
-import {
-  auth,
-  registerWithEmailAndPassword,
-  signInWithGoogle,
-} from "../firebase";
+import React, { useState } from "react";
+import { useAuth } from "../contexts/UserAuth";
 import "../styles/Register.css";
 
 
-function Register() {
+const Register = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [user, loading, error] = useAuthState(auth);
-  //const history = useHistory();
-  const register = () => {
-
-    if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
-  };
-  if (loading) return;
-  // if (user) history.replace("/home");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const {auth, registerWithEmailAndPassword, googleLogin} = useAuth();
+ 
+  console.log("hi")
 
 
   return (
     <div className="register">
       <div className="register__container">
         <input
-          type="text"
+          type="email"
           className="register__textBox"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-        />
-        <input
-          type="text"
-          className="register__textBox"
-          value={email}
+          placeholder="name@example.com"
+          autoFocus
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
         />
         <input
           type="password"
           className="register__textBox"
-          value={password}
+          placeholder=""
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
         />
-        <button className="register__btn" onClick={register}>
+        <button className="register__btn" onClick={registerWithEmailAndPassword(auth, email, password)}>
           Register
         </button>
         <button
           className="register__btn register__google"
-          onClick={signInWithGoogle}
+          onClick={googleLogin}
         >
           Register with Google
         </button>
-        <div>
-          Already have an account? <Link to="/">Login</Link> now.
-        </div>
       </div>
     </div>
   );

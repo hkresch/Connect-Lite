@@ -15,8 +15,10 @@ const typeDefs = gql`
 type USER {
     id: ID! @id(autogenerate: true)
     name: String!
-    email: String !
-    authProvider: String!
+    email: String!
+    active: Boolean!
+    role: String!
+    userIconURL: String
     shows: [SHOW!]! @relationship(type: "WATCHED", direction: OUT)
 
 }
@@ -34,7 +36,19 @@ type GENRE {
     shows: [SHOW!]! @relationship(type: "MEMBER", direction: IN)
 }
 
-`;
+type Mutation {
+    mergePerson(email: String!, name: String!, active: Boolean!, role: String, userIconUrl: String): USER @cypher(statement: """
+    MERGE (p:USER {email:$email })
+    ON CREATE SET p.name = $name, p.active = $active, p.userIconUrl = $userIconUrl,  p.role = 'user'
+    ON MATCH SET p.name = $name, p.active = $active, p.userIconUrl = $userIconUrl
+    RETURN p
+  """)
+
+}
+
+`
+
+
 
 //put queries and mutations up here
 

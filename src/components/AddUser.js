@@ -11,11 +11,11 @@ mutation ($input: [USERCreateInput!]!) {
     }
   }
  `
-;;
+
 
 function addUser() {
     const [name, setName] = useState("");
-    const [createTodo, { error }] = useMutation(CREATE_USER, {
+    const [addUser, { error }] = useMutation(CREATE_USER, {
         refetchQueries: [
             {
                 query: USER_QUERY
