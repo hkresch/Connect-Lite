@@ -53,7 +53,7 @@ import GoogleButton from 'react-google-button';
                 onChange={(e) => setPassword(e.target.value)}  />
             </Form.Group>
             <Button variant='primary' type='submit' onClick={() => registerWithEmailAndPassword(auth, email, password)}>
-            </Button>
+            Hello </Button>
             <GoogleButton
         type="light"
         onClick={googleLogin}>

@@ -16,7 +16,6 @@ const Navbar = () => {
         <CustomLink to="/people">People</CustomLink>
         <CustomLink to="/shows">Shows</CustomLink>
         <CustomLink to="/logout">Logout</CustomLink>
-        <CustomLink to="/register">Register</CustomLink>
     </ul>
     </nav>
     )

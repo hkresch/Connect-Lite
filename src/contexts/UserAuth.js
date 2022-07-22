@@ -136,10 +136,15 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
     }
   };
 
-const registerWithEmailAndPassword = () => {
-      createUserWithEmailAndPassword(auth, email, password).catch((err) => {
-        console.log(err);
-      })}
+const registerWithEmailAndPassword = (auth, email, password) => {
+      try{
+        console.log(email)
+      createUserWithEmailAndPassword(auth, email, password);
+      } catch(err){
+        console.log(err)
+      }
+      signInWithEmailAndPassword(auth, email, password);
+      }
 
 
   // handle logout, majority of state logic in onAuthStateChanged

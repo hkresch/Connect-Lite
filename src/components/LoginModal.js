@@ -18,24 +18,34 @@ import Reset from '../pages/Reset';
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showlogin, setShowLogin] = useState("")
+  const [showRegister, setShowRegister] = useState("")
+  const [showReset, setShowReset] = useState("")
 
   return (
     <>
     <div className="d-grid gap-2">
-      <Button variant="primary" onClick={handleShow} size="lg">
-        Signin
+     <Button onClick={() => setShowLogin(true)}>
+        Login!
+      </Button>
+      <Button onClick={() => setShowRegister(true)}>
+        Register!
+      </Button>
+
+      <Button onClick={() => setShowReset(true)}>
+        Reset Password
       </Button>
       </div>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sign In</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+      <Modal
+        show={showlogin}
+        onHide={() => setShowLogin(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Login
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Email address</Form.Label>
@@ -65,21 +75,51 @@ import Reset from '../pages/Reset';
         onClick={googleLogin}>
         Login with Google
         </GoogleButton>
-        <Button onClick={() => Register}>
-    Register
-    </Button>
-    <Button onClick={Reset}>
-    Reset
-    </Button>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+        </Form>
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+        show={showRegister}
+        onHide={() => setShowRegister(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Register
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Password</Form.Label>
+              <Form.Control                
+                type="password"
+                placeholder=""
+                onChange={(e) => setPassword(e.target.value)}  />
+            </Form.Group>
+            <Button variant='primary' type='submit'
+            onSubmit={registerWithEmailAndPassword(auth, email, password)}>
+            Register
+            </Button>
+            <GoogleButton
+        type="light"
+        onClick={googleLogin}>
+        Register with Google
+        </GoogleButton>
+        </Form>
+          </Modal.Body>
+        </Modal> </>
   );
 
  }
