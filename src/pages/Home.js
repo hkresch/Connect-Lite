@@ -1,15 +1,15 @@
 import React, {useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import GetUser from "../queries/GetUser";
+import GetUser, { GET_USER } from "../queries/GetUser";
 import "../styles/Home.css";
 import Loader from "../components/Loader";
 import { useAuth } from "../contexts/UserAuth";
+import { gql, useQuery } from '@apollo/client';
+import { GetUserShows } from "../queries/GetAllShows";
 
 
 
 function Home () {
     const {user} =useAuth();
-    //const [loading] = useState();
 
     return (
         <div className="dashboard">
@@ -17,6 +17,7 @@ function Home () {
                 Logged in as 
                 <div>{user.name}</div>
                 <div>{user.email}</div>
+                <GetUser name={user.name}/>
             </div>
             </div>
     );

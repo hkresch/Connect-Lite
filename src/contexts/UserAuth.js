@@ -48,6 +48,7 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
   const [user, setUser] = useState() // currently logged in user, null if none
   const [loading, setLoading] = useState(true) // start loading, when firebase recognizes if there is a user, is set to false
   // mutation to create a new user in db if needed (otherwise just update name/email/picture)
+  const [displayName, setDisplayName] = useState("")
 
 
   const [createNewUser] = useMutation(CREATE_USER, {
@@ -62,13 +63,16 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
     }
     
   }) 
-
   
 
-
   async function mergeUser(firebaseUser){
+
     if (firebaseUser) {
       const providerData=  firebaseUser.providerData[0] 
+    
+    providerData.displayName === null? providerData.displayName=displayName : providerData.displayName
+    console.log(displayName)
+
       //console.log(providerData)//how is this getting the right info
       // creates a new user in the db if a user with the email provided from google does not already exist
       //console.log(providerData.email)
@@ -109,7 +113,7 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
 
 
   useEffect(() => {
-    // Runs every time that firebase detects an auth change (auto sign-in, sign out, etc)
+    // Runs every time that firebase detects an auth change (auth sign-in, sign out, etc)
       const unsub  =  onAuthStateChanged(auth, mergeUser)
     
 
@@ -127,8 +131,7 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
   }
 
   //Perform login verification when a user attempts to login using email and password
-  const logInWithEmailAndPassword = () => {
-    console.log("hi")
+  const logInWithEmailAndPassword = (auth, email, password) => {
     try {
       signInWithEmailAndPassword(auth, email, password);
     } catch(err){
@@ -136,14 +139,13 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
     }
   };
 
-const registerWithEmailAndPassword = (auth, email, password) => {
+const registerWithEmailAndPassword = (auth, name, email, password) => {
       try{
-        console.log(email)
       createUserWithEmailAndPassword(auth, email, password);
-      } catch(err){
+      } catch(err) {
         console.log(err)
       }
-      signInWithEmailAndPassword(auth, email, password);
+      logInWithEmailAndPassword(auth, name, email, password);
       }
 
 
@@ -154,7 +156,6 @@ const registerWithEmailAndPassword = (auth, email, password) => {
     }).catch((err) => {
       console.log(err);
     })
-
     localStorage.clear();
   }
 

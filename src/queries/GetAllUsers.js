@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import Loader from '../components/Loader';
 
+
 const GET_USERS = gql`
 query Query {
     users {
@@ -24,7 +25,6 @@ function GetAllUsers () {
                 <p key= {user.name}>
                     {user.name}
                 </p>
-            
             ))}
         </div>
     );

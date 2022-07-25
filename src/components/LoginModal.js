@@ -17,6 +17,7 @@ import Reset from '../pages/Reset';
   
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
 
   const [showlogin, setShowLogin] = useState("")
   const [showRegister, setShowRegister] = useState("")
@@ -67,7 +68,7 @@ import Reset from '../pages/Reset';
                 onChange={(e) => setPassword(e.target.value)}  />
             </Form.Group>
             <Button variant='primary' type='submit'
-            onClick={() => logInWithEmailAndPassword(auth, email, password)}>
+            onSubmit={logInWithEmailAndPassword(auth, email, password)}>
             Login
             </Button>
             <GoogleButton
@@ -90,11 +91,19 @@ import Reset from '../pages/Reset';
           <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+              type="name"
+              placeholder="Full Name"
+              autoFocus
+              onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
-                autoFocus
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
@@ -109,7 +118,7 @@ import Reset from '../pages/Reset';
                 onChange={(e) => setPassword(e.target.value)}  />
             </Form.Group>
             <Button variant='primary' type='submit'
-            onSubmit={registerWithEmailAndPassword(auth, email, password)}>
+            onSubmit={registerWithEmailAndPassword(auth, name, email, password)}>
             Register
             </Button>
             <GoogleButton

@@ -18,7 +18,7 @@ type USER {
     email: String!
     active: Boolean!
     role: String!
-    userIconURL: String
+    userIconURL: String!
     shows: [SHOW!]! @relationship(type: "WATCHED", direction: OUT)
 
 }
