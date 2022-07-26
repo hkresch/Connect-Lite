@@ -19,14 +19,18 @@ type USER {
     active: Boolean!
     role: String!
     userIconURL: String!
-    shows: [SHOW!]! @relationship(type: "WATCHED", direction: OUT)
+    shows: [SHOW!]! @relationship(type: "WATCHED", properties:"Ranking", direction: OUT)
 
+}
+
+interface Ranking @relationshipProperties {
+    ranking: Int
 }
 
 type SHOW {
     id: ID! @id(autogenerate: true)
     name: String!
-    users: [USER!]! @relationship(type: "WATCHED", direction: IN)
+    users: [USER!]! @relationship(type: "WATCHED", properties: "Ranking", direction: IN)
     genres: [GENRE!]! @relationship(type: "MEMBER", direction: OUT)
 }
 
@@ -43,8 +47,8 @@ type Mutation {
     ON MATCH SET p.name = $name, p.active = $active, p.userIconUrl = $userIconUrl
     RETURN p
   """)
-
 }
+
 
 `
 

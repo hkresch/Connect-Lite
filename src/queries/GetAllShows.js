@@ -32,7 +32,8 @@ function GetAllShows () {
                         <Dropdown.Menu>
                             <Dropdown.Item href="#/action-1">3 - Would Recommend! </Dropdown.Item>
                             <Dropdown.Item href="#/action-2">2 - It was Fine</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">1 - Would Not Recommend</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">1 - Would Not Recommend</Dropdown.Item>
+                            <Dropdown.Item href="#/action-4">Delete Rating</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </p>

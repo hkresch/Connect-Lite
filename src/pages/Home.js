@@ -14,9 +14,6 @@ function Home () {
     return (
         <div className="dashboard">
             <div className="dashboard__container">
-                Logged in as 
-                <div>{user.name}</div>
-                <div>{user.email}</div>
                 <GetUser name={user.name}/>
             </div>
             </div>
