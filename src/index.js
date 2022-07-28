@@ -12,6 +12,7 @@ import {
 } from "@apollo/client";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { UserAuthProvider } from "./contexts/UserAuth"
+import {RecoilRoot} from 'recoil'
 
 
 
@@ -43,6 +44,7 @@ const client = new ApolloClient ({
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
     <React.StrictMode>
+    <RecoilRoot>
         <BrowserRouter forceRefresh={true}>
        <ApolloProvider client={client}>
        <UserAuthProvider>
@@ -50,5 +52,10 @@ root.render(
         </UserAuthProvider>
         </ApolloProvider>
         </BrowserRouter>
-    </React.StrictMode>
+        </RecoilRoot>
+        </React.StrictMode>
+    
+    
+
+    
 )
