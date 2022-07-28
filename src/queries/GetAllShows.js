@@ -5,9 +5,11 @@ import { Typography, Rating} from '@mui/material'
 import { argsToArgsConfig } from 'graphql/type/definition';
 import {ADD_RANKING} from '../mutations/AddRanking';
 import { useAuth } from '../contexts/UserAuth';
-import { showsState } from '../atoms/ShowInfoAtom';
-import { useRecoilValue } from "recoil"
+import { showsState, RankingsState } from '../atoms/ShowInfoAtom';
+import { useRecoilState, useRecoilValue } from "recoil"
 import { userProfileState } from '../atoms/UserInfoAtom';
+import GetRanking from './GetRanking';
+import { GET_USER } from './GetUser';
 
 const GET_SHOWS = gql`
     query GetShows {
@@ -18,58 +20,61 @@ const GET_SHOWS = gql`
 
 
 
-
-
-
 function GetAllShows () {
-    const [AddRanking] =  useMutation(ADD_RANKING)
-        // update(cache, { data: {value}}) {
-        //     cache.writeQuery({
-        //         query: GET_USER,
-        //         variables: {users: name}, //need to add the show as input
-        //         data : {ranking: [value]} //set the edge ranking 
-
-        //     })
+    const [AddRanking] =  useMutation(ADD_RANKING, {
+      refetchQueries: [
+        {query: GET_USER},
+        'GetUser'
+      ],
+    }
+    )
         
     
     const { loading, error, data } = useQuery(GET_SHOWS);
 
-    // const setShowsList = useSetRecoilState(showsState);
 
-    const ranks = useRecoilValue(userProfileState)
-    console.log(ranks)
-    // const name = ranks.name;
-    // console.log(name)
     
-    // console.log(ranks.shows.length)
-    // for (let i = 0; i< ranks.length; i++){
-    //   console.log(ranks.name)
-    // }
 
-    const value = ranks.showsConnection;
-    console.log(value)
+    const user = useRecoilValue(userProfileState)
+    const name = user.name
+    const shows = useRecoilValue(showsState)
+    console.log(shows)
+    const ranks = useRecoilValue(RankingsState)
+    console.log(ranks)
+    // var rank = ranks
+    // console.log(rank)
+    // ///console.log(ranks)
+    // const name = ranks.name;
+    // // console.log(name)
+    
+ 
+    const showsList = shows
+
+    let value = ranks.ranking
+    const getRanking = (show) =>{
+        for (let i = 0; i<showsList.length;i++){
+          if (show === showsList[i].name){
+            return ranks[i].ranking
+          }
+        }
+        return 0
+
+    }
     if (loading) return <Loader/>;
 
     if (error) return `Error! ${error.message}`;
 
 
-
-    // setShowsList((oldShowsSet) => [
-    //     {
-    //         shows: data.shows
-    //     }
-    // ])
-
-
     return (
 <div>
+  {}
     {data.shows.map((show) => (
         <p key={show.name}>
           
     <Typography component="legend">{show.name}</Typography>
         <Rating
         name="simple-controlled"
-        value={value}
+        defaultValue={getRanking(show.name)}
         onChange={(event,newValue) => AddRanking (
             {variables:{
                 "where": {

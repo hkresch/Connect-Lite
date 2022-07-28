@@ -2,11 +2,12 @@ import { gql, useQuery } from '@apollo/client';
 import React, {useEffect} from 'react';
 import Loader from '../components/Loader';
 import { showsRanked } from '../atoms/ShowInfoAtom';
-import {useRecoilState, useRecoilValue} from "recoil" 
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil" 
 import { userProfileState } from '../atoms/UserInfoAtom';
+import { showsState, RankingsState } from '../atoms/ShowInfoAtom';
 
 export const GET_USER = gql`
-query Query($where: USERWhere) {
+query GetUser($where: USERWhere) {
   users(where: $where) {
     name
     email
@@ -25,7 +26,11 @@ query Query($where: USERWhere) {
 
 const GetUser =  (args) => {
     const [userState, setUserProfileState] = useRecoilState(userProfileState);
-    const { loading, error, data } = useQuery(GET_USER, { variables: {
+    const [showState, setshowsState] = useRecoilState(showsState);
+    const [setRanking, setRankingsState] = useRecoilState(RankingsState)
+    //const [RankingsState, setRankingsState] = useRecoilState(RankingsState)
+    const { loading, error, data } = useQuery(GET_USER, //can implements a fetch policy on this 
+      { variables: {
       where: {
         name:args.name
       }
@@ -33,7 +38,6 @@ const GetUser =  (args) => {
 
 
     
-    console.log(userState)
 
     if (loading) return <Loader/>;
 
@@ -43,46 +47,14 @@ const GetUser =  (args) => {
     const shows = (user.shows)
     const rankings = (user.showsConnection.edges) 
 
-    console.log(data.users[0])
-
     // useEffect(()=>{
   
     //   if(!loading && data) {
-        setUserProfileState(data.users[0])      
-    //   }
-    // },[data])
+    setUserProfileState(data.users[0])
+    setshowsState(data.users[0].shows)
+    setRankingsState(user.showsConnection.edges)
+
+    console.log(user.showsConnection.edges)
+    
+
   
-    // setUserProfileState(
-    //     {
-    //       user: user,
-    //       shows: shows,
-    //       rankings: rankings
-    //     }
-    //   )
-      
-    
-
-    
-    const UserInfo = shows.map((show, index) => {
-      const rankingContent = rankings[index].ranking;
-      return (
-        <div>
-          <ul>{show.name} : {rankingContent}</ul>
-        </div>
-      )})
-    
-    return (
-  <div>
-    <h1>{user.name}</h1>
-    <h1>{user.email}</h1>
-    <h1>Shows:{UserInfo}
-    </h1>
-  </div>
-      
-    );
-    
-
-} 
-
-export default GetUser;
-
