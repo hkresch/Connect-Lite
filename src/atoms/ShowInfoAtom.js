@@ -10,6 +10,11 @@ export const RankingsState = atom({
     default: []
 })
 
+export const RecommendationsState = atom({
+    key: "RecommendationsState",
+    default : []
+})
+
 
 
 

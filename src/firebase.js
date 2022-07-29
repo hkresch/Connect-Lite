@@ -1,5 +1,5 @@
 import addUser from './mutations/AddUser'
-import GetUser from './queries/GetUser.js'
+import SetUser from './components/DisplayUser';
 
 import {
     GoogleAuthProvider,

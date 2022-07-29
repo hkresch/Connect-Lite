@@ -10,6 +10,7 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { userProfileState } from '../atoms/UserInfoAtom';
 import GetRanking from './GetRanking';
 import { GET_USER } from './GetUser';
+import { DELETE_RANKING } from '../mutations/DeleteRanking';
 
 const GET_SHOWS = gql`
     query GetShows {
@@ -28,11 +29,21 @@ function GetAllShows () {
       ],
     }
     )
+
+    const [DeleteRanking] =  useMutation(DELETE_RANKING, {
+      refetchQueries: [
+        {query: GET_USER},
+        'GetUser'
+      ],
+    }
+    )
         
     
     const { loading, error, data } = useQuery(GET_SHOWS);
 
+   // const AddorDeleteRanking = (newValue, name, showName) = {
 
+   // }
     
 
     const user = useRecoilValue(userProfileState)
@@ -50,7 +61,7 @@ function GetAllShows () {
  
     const showsList = shows
 
-    let value = ranks.ranking
+
     const getRanking = (show) =>{
         for (let i = 0; i<showsList.length;i++){
           if (show === showsList[i].name){
@@ -59,6 +70,53 @@ function GetAllShows () {
         }
         return 0
 
+    }
+
+    const ChangeRanking = (name, showName, newValue) => {
+      if (newValue === null){ DeleteRanking ( {variables: 
+        {
+          "where": {
+            "name": name
+          },
+          "disconnect": {
+            "shows": [
+              {
+                "where": {
+                  "node": {
+                    "name": showName
+                  }
+                }
+              }
+            ]
+          }
+        }}
+      )
+      } else{
+        AddRanking (
+          {variables:{
+              "where": {
+                "name": name
+              },
+              "connect": {
+                "shows": [
+                  {
+                    "where": {
+                      "node": {
+                        "name": showName
+                      }
+                    },
+                    "edge": {
+                      "ranking": newValue
+                    }
+                  }
+                ]
+              }
+            }
+            }
+      )
+
+
+      }
     }
     if (loading) return <Loader/>;
 
@@ -75,31 +133,10 @@ function GetAllShows () {
         <Rating
         name="simple-controlled"
         defaultValue={getRanking(show.name)}
-        onChange={(event,newValue) => AddRanking (
-            {variables:{
-                "where": {
-                  "name": name
-                },
-                "connect": {
-                  "shows": [
-                    {
-                      "where": {
-                        "node": {
-                          "name": show.name
-                        }
-                      },
-                      "edge": {
-                        "ranking": newValue
-                      }
-                    }
-                  ]
-                }
-              }
-              }
-        )}
+        onChange={(event,newValue) => ChangeRanking(name, show.name, newValue) }
         />
         </p>
-    ))};
+    ))}
 </div>
 
 
@@ -108,24 +145,3 @@ function GetAllShows () {
 } 
 
 export default GetAllShows;
-
-
-
-{/* <div>
-{data.shows.map((show) => (
-    <p key= {show.name}>
-        <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {show.name}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">3 - Would Recommend! </Dropdown.Item>
-                <Dropdown.Item href="#/action-2">2 - It was Fine</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">1 - Would Not Recommend</Dropdown.Item>
-                <Dropdown.Item href="#/action-4">Delete Rating</Dropdown.Item>
-            </Dropdown.Menu>
-        </Dropdown>
-    </p>
-
-))}
-</div> */}

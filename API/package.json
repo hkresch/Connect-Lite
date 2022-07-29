@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/hkresch/Connect-Lite#readme",
   "dependencies": {
-    "@neo4j/graphql": "^3.5.0",
-    "apollo-server": "^3.9.0",
+    "@neo4j/graphql": "^3.6.0",
+    "apollo-server": "^3.10.0",
     "dotenv": "^16.0.1",
     "graphql": "^16.5.0",
-    "neo4j-driver": "^4.4.6"
+    "neo4j-driver": "^4.4.7"
   }
 }

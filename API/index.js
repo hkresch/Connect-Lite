@@ -20,7 +20,10 @@ type USER {
     role: String!
     userIconURL: String!
     shows: [SHOW!]! @relationship(type: "WATCHED", properties:"Ranking", direction: OUT)
-
+    recommendedShows: [SHOW!] @cypher(statement: """
+	MATCH (this)-[:WATCHED]->(:SHOW)-[:MEMBER]->(genre:GENRE)<-[:MEMBER]-(s:SHOW)
+    RETURN s
+    """)
 }
 
 interface Ranking @relationshipProperties {
@@ -48,7 +51,6 @@ type Mutation {
     RETURN p
   """)
 }
-
 
 `
 
