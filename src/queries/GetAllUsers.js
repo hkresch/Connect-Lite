@@ -19,10 +19,11 @@ function GetAllUsers () {
 
     if (error) return `Error! ${error.message}`;
 
+
     return (
         <div>
             {data.users.map((user) => (
-                <p key= {user.name}>
+                <p key= {user.email}>
                     {user.name}
                 </p>
             ))}

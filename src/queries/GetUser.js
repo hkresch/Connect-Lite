@@ -10,6 +10,7 @@ query GetUser($where: USERWhere) {
   users(where: $where) {
     name
     email
+    role
     shows {
       name
     }
@@ -40,8 +41,8 @@ export function GetUser(args){
         email:args.email
       }
     }});
-    console.log('hi')
-    console.log(loading)
+    //console.log('hi')
+    //console.log(loading)
     //if (loading) return <Loader/>
     if (error) return 'Something Bad Happened'
     if (loading) return 'Loading'

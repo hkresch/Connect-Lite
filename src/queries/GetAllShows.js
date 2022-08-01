@@ -1,8 +1,8 @@
 import { gql, useQuery, useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import Loader from '../components/Loader';
-import { Typography, Rating} from '@mui/material'
-import { argsToArgsConfig } from 'graphql/type/definition';
+import { Typography, Rating, TextField} from '@mui/material'
+import AddShowButton from '../components/AddShowButton'
 import {ADD_RANKING} from '../mutations/AddRanking';
 import { useAuth } from '../contexts/UserAuth';
 import { showsState, RankingsState } from '../atoms/ShowInfoAtom';
@@ -12,7 +12,8 @@ import GetRanking from './GetRanking';
 import { GET_USER } from './GetUser';
 import { DELETE_RANKING } from '../mutations/DeleteRanking';
 
-const GET_SHOWS = gql`
+
+export const GET_SHOWS = gql`
     query GetShows {
         shows {
             name
@@ -126,7 +127,7 @@ function GetAllShows () {
     return (
 <div>
   {}
-    {data.shows.map((show) => (
+      {data.shows.map((show) => (
         <p key={show.name}>
           
     <Typography component="legend">{show.name}</Typography>
@@ -137,6 +138,7 @@ function GetAllShows () {
         />
         </p>
     ))}
+    
 </div>
 
 

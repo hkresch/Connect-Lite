@@ -28,7 +28,6 @@ const UserInfo = shows.map((show, index) => {
   <div>
     <h1>{user.name}</h1>
     <h1>{user.email}</h1>
-    
     <h1>Shows:{UserInfo}
     </h1>
   </div>

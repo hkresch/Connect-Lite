@@ -17,11 +17,12 @@ type USER {
     name: String!
     email: String!
     active: Boolean!
-    role: String!
+    role: String
     userIconURL: String!
     shows: [SHOW!]! @relationship(type: "WATCHED", properties:"Ranking", direction: OUT)
     recommendedShows: [SHOW!] @cypher(statement: """
 	MATCH (this)-[:WATCHED]->(:SHOW)-[:MEMBER]->(genre:GENRE)<-[:MEMBER]-(s:SHOW)
+    WHERE NOT (this)-[:WATCHED]->(s)
     RETURN s
     """)
 }
