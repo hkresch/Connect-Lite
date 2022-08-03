@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const Dotenv = require('dotenv-webpack')
 const htmlPlugin = new HtmlWebPackPlugin({
     template: "./src/index.html",
     filename: "./index.html"
@@ -13,6 +14,12 @@ module.exports = {
     output: {
         publicPath: '/'
     },
+    // resolve: {
+    //     fallback: {
+    //         "path": "browserfy"
+    //     }
+
+    
     module: {
         rules: [
             {
@@ -36,5 +43,8 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
     },
-    plugins: [htmlPlugin]
+    plugins: [htmlPlugin,
+    new Dotenv({
+        path: './.env'
+    })]
 };

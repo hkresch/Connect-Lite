@@ -13,22 +13,10 @@ import {
   signOut,
 } from "firebase/auth"
 import LoginModal from "../components/LoginModal";
-import { initializeApp } from "firebase/app";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAVOpY3zSgbzT858TOiN__DFVaJ2hlwkHE",
-  authDomain: "connect-lite-a8eac.firebaseapp.com",
-  projectId: "connect-lite-a8eac",
-  storageBucket: "connect-lite-a8eac.appspot.com",
-  messagingSenderId: "788405864333",
-  appId: "1:788405864333:web:864ec251f314bca5935fc4"
-};
-
-const app = initializeApp(firebaseConfig);
+import {auth} from "../index"
 
 
 
-const auth = getAuth(app);
 
 
 
@@ -125,10 +113,11 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
   // The majority of the state logic happens in onAuthStateChanged
   const provider = new GoogleAuthProvider();
   const googleLogin = () => {
-    signInWithPopup(auth,provider).catch((err) => { //right Google Auth Provider?
-      console.log(err);
-    })
-  }
+
+    signInWithPopup(auth,provider).then((err) => {
+        console.log(err)
+      })
+    }
 
   //Perform login verification when a user attempts to login using email and password
   const logInWithEmailAndPassword = (auth, email, password) => {

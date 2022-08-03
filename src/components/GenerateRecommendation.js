@@ -12,7 +12,7 @@ import { useState } from "react";
 export const GenerateRecommendation = () => {
 
     const recommendations = useRecoilValue(RecommendationsState);
-    console.log(recommendations)
+    //console.log(recommendations)
     const [recs, setRecs] = useState("foo")
     // console.log(recommendations[1])
     // useEffect(() => {setRecs(recommendations[1])}, []) 
