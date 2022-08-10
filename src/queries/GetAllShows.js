@@ -8,9 +8,10 @@ import { useAuth } from '../contexts/UserAuth';
 import { showsState, RankingsState } from '../atoms/ShowInfoAtom';
 import { useRecoilState, useRecoilValue } from "recoil"
 import { userProfileState } from '../atoms/UserInfoAtom';
-import GetRanking from './GetRanking';
 import { GET_USER } from './GetUser';
 import { DELETE_RANKING } from '../mutations/DeleteRanking';
+import { Col, Row } from 'antd'
+
 
 
 export const GET_SHOWS = gql`
@@ -38,6 +39,8 @@ function GetAllShows () {
       ],
     }
     )
+
+    const [value, setValue] = useState();
         
     
     const { loading, error, data } = useQuery(GET_SHOWS);
@@ -124,20 +127,26 @@ function GetAllShows () {
     if (error) return `Error! ${error.message}`;
 
 
+  
     return (
-<div>
-  {}
+<div >
+  
+  
       {data.shows.map((show) => (
         <p key={show.name}>
           
-    <Typography component="legend">{show.name}</Typography>
+    <Typography component="legend" style={{fontSize: "25px", font:"American Typewriter", fontFamily:"serif", }}>{show.name}{show.description} </Typography>
         <Rating
-        name="simple-controlled"
+        size='large'
         defaultValue={getRanking(show.name)}
-        onChange={(event,newValue) => ChangeRanking(name, show.name, newValue) }
+        onChange={(event,newValue) => {ChangeRanking(name, show.name, newValue)}}
         />
-        </p>
-    ))}
+
+        </p>))}
+        
+    
+    
+    
     
 </div>
 

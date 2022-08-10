@@ -9,12 +9,14 @@ import LoginModal from "./components/LoginModal"
 import LogoutModal from "./components/LogoutModal"
 import { GetUser } from "./queries/GetUser"
 import { useAuth } from "./contexts/UserAuth"
+import { GetGenres } from "./queries/GetGenres"
+
 
 
 
 
 const App = () => {
-    const {user} =useAuth();
+    const {user, authenticated} =useAuth();
     console.log(user)
 
 
@@ -24,10 +26,18 @@ const App = () => {
     <div className="container">
     <GetUser email={user.email}/>
         <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route 
+            exact
+            path="/"
+            render={() => {
+                return(
+                    authenticated?
+                    <Redirect to ="/home"/> :
+                    <Redirect to="/components/LoginModal"/>
+                )
+            }}/> 
             <Route path="/home" element={<Home/>} />
             <Route path="/people" element={<People/>}/>
-            <Route path="/register" element={<Register/>}/>
             <Route path="/shows" element={<Shows />} />
             <Route path="/logout" element={<LogoutModal/>}/>
         </Routes>

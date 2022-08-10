@@ -8,14 +8,13 @@ const Navbar = () => {
     const path = window.location.name
     return (
     <nav className="nav">
-    <Link to="/" className='site-title'>
+    <Link to="/home" className='site-title'>
         TV Lite
     </Link>
     <ul>
         <CustomLink to="/home">Home</CustomLink>
         <CustomLink to="/people">People</CustomLink>
         <CustomLink to="/shows">Shows</CustomLink>
-        <CustomLink to="/logout">Logout</CustomLink>
     </ul>
     </nav>
     )

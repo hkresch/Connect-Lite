@@ -4,9 +4,9 @@ import AddShowButton from '../components/AddShowButton';
 const Shows = () => {
     return (
         <div>
-        <h2>Show</h2>
-        <AddShowButton/>
+        <h2>Shows</h2>
         <GetAllShows/>
+        <AddShowButton/>
         </div>
     )
 }

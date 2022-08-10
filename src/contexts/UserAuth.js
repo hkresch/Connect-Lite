@@ -14,6 +14,7 @@ import {
 } from "firebase/auth"
 import LoginModal from "../components/LoginModal";
 import {auth} from "../index"
+import Home from "../pages/Home";
 
 
 
@@ -64,6 +65,8 @@ export const UserAuthProvider = ({ children }) => { // eslint-disable-line react
       //console.log(providerData)//how is this getting the right info
       // creates a new user in the db if a user with the email provided from google does not already exist
       //console.log(providerData.email)
+
+      console.log(providerData.photoURL)
 
       const {data : { mergePerson }} = await createNewUser({
         variables: {

@@ -11,8 +11,13 @@ query GetUser($where: USERWhere) {
     name
     email
     role
+    userIconUrl
     shows {
       name
+      description
+      genres {
+        name
+      }
     }
     showsConnection {
       edges {
@@ -21,6 +26,7 @@ query GetUser($where: USERWhere) {
     }
     recommendedShows{
       name
+      description
     }
   }
 }
@@ -55,7 +61,7 @@ export function GetUser(args){
     const shows = (user.shows)
     const rankings = (user.showsConnection.edges)
     const recommendations =(user.recommendedShows)
-    console.log(recommendations)
+    console.log(shows)
 
 
     setUserProfileState(user)

@@ -39,7 +39,7 @@ type USER {
     email: String!
     active: Boolean!
     role: String
-    userIconURL: String!
+    userIconUrl: String!
     shows: [SHOW!]! @relationship(type: "WATCHED", properties:"Ranking", direction: OUT)
     recommendedShows: [SHOW!] @cypher(statement: """
 	MATCH (this)-[:WATCHED]->(:SHOW)-[:MEMBER]->(genre:GENRE)<-[:MEMBER]-(s:SHOW)
@@ -55,6 +55,7 @@ interface Ranking @relationshipProperties {
 type SHOW {
     id: ID! @id(autogenerate: true)
     name: String!
+    description: String!
     users: [USER!]! @relationship(type: "WATCHED", properties: "Ranking", direction: IN)
     genres: [GENRE!]! @relationship(type: "MEMBER", direction: OUT)
 }
@@ -163,7 +164,7 @@ const startServer = async () => {
 
 const PORT = 4000;
 const PATH = '/graphql'
-const LINK = "https://localhost:4000"
+const LINK = "https://localhost/4000"
 startServer();//neo4j/graphql startup
 
 // The `listen` method launches our web server.

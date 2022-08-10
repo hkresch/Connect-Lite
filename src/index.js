@@ -18,6 +18,7 @@ import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 
 
+
 export const app = initializeApp(firebaseConfig)
 
 export const auth = getAuth(app);
@@ -41,6 +42,7 @@ const authLink = setContext(async (_, { headers }) => {
     //get the authentication token from local storage if it exists
      
     const token = await auth.currentUser.getIdToken()
+
     console.log(token)
     return {
         headers: {

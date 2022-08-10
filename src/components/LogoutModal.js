@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/UserAuth";
 
 const LogoutModal = () => {
     
-    const { logout } = useAuth();
+    const { logout, user, authenticated } = useAuth();
     console.log("hi")
 
 
@@ -18,25 +18,20 @@ const LogoutModal = () => {
 
     return (
         <>
-        <Button variant="primary" onClick={handleShow}>
-            Logout
-        </Button>
+        <Button onClick={handleShow} style={{display: 'flex', marginLeft: 'auto'}}>Logout</Button>
 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Logout</Modal.Title>
+                <Modal.Title>Would you like to Logout?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Button variant="primary" onClick={logout}>
+                <Button variant="default" onClick={logout}>
                     Logout
                 </Button>
-            </Modal.Body>
-
-            <Modal.Footer>
-                <Button variant="secondary">
-                    Close
+                <Button variant="primary" onClick={handleClose} style={{marginLeft: 'auto'}}>
+                    Stay Signed In
                 </Button>
-            </Modal.Footer>
+            </Modal.Body>
         </Modal>
         
         

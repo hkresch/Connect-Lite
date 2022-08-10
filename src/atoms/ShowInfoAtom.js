@@ -15,6 +15,13 @@ export const RecommendationsState = atom({
     default : []
 })
 
+export const GenresState = atom({
+    key: "GenresState",
+    default: []
+})
+
+
+
 
 
 
