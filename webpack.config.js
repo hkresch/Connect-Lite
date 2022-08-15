@@ -12,7 +12,7 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     output: {
-        publicPath: '/'
+        publicPath: '/',
     },
     // resolve: {
     //     fallback: {
