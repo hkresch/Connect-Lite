@@ -4,7 +4,7 @@ const express = require("express");
 const{Neo4jGraphQL} = require("@neo4j/graphql")
 require('dotenv').config()
 const { resolvers } = require('./resolvers');
-const { admin } = require('firebase-admin');
+const { admin, credential } = require('firebase-admin');
 
 const {getAuth} = require('firebase-admin/auth')
 const cors = require('cors');
@@ -15,8 +15,10 @@ const { Neo4jGraphQLAuthJWKSPlugin } = require("@neo4j/graphql-plugin-auth");
 
 const { initializeApp, applicationDefault } = require('firebase-admin/app')
 
+var serviceAccount = require("./private_key.json")
+
 const appAdmin = initializeApp({
-    credential: applicationDefault(),
+    credential: credential.cert(serviceAccount),
     databaseURL: "https://neo4j.firebaseio.com"
 })
 
